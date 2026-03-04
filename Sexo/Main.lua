@@ -13,7 +13,7 @@ local antiAFKConnection
 
 
 
-local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/lkjhg969/ffdsf/refs/heads/main/hgfhj", true))()
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/f58075956-jpg/Sxo.lua/refs/heads/main/Papa.lua", true))()
 
 local window = library:AddWindow("CRONOS| Main", {
     main_color = Color3.fromRGB(138, 0, 0),
