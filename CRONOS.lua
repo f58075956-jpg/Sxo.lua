@@ -14,7 +14,7 @@ local muscleEvent = player:WaitForChild("muscleEvent")
 local leaderstats = player:WaitForChild("leaderstats")
 local rebirthsStat = leaderstats:WaitForChild("Rebirths")
 
-local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/lkjhg969/ffdsf/refs/heads/main/hgfhj", true))()
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/f58075956-jpg/Sxo.lua/refs/heads/main/Sexo.Lua", true))()
 
 local window = library:AddWindow("CRONOS | Farming", {
     main_color = Color3.fromRGB(138, 0, 0),
