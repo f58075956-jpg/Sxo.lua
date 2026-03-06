@@ -80,9 +80,9 @@ local InventoryTab = window:AddTab("Inventory")
 local PetsTab = window:AddTab("Pet Shop")
 local TeleportTab = window:AddTab("Teleports")
 local StatsTab = window:AddTab("Stats")
+local FastRebTab = window:AddTab("Fast Rebirth")
 local infoTab = window:AddTab("Info")
 KillingTab:Show()
-
 infoTab:AddLabel("karma").TextSize = 20
 infoTab:AddLabel("ONTOP")
 infoTab:AddButton("Copy ", function()
