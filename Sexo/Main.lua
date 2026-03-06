@@ -2060,28 +2060,26 @@ for _, info in ipairs(stats) do
     statLabels[info.name].TextSize = 20
 end
 
+task.spawn(function()
+    while true do
+        for _, info in ipairs(stats) do
+            local currentValue = info.stat.Value
+            local gained = currentValue - initialValues[info.name]
 
+            local displayText = string.format(
+                "%s: %s (%s) | Gained: %s (%s)",
+                info.name,
+                formatNumber(currentValue),
+                formatWithCommas(currentValue),
+                formatNumber(gained),
+                formatWithCommas(gained)
+            )
 
---// FARMING TAB
-local folder = FarmingTab
-local selectrock = nil
-
---// VARIABLES
-getgenv().autoPunch = false
-getgenv().autoFarm = false
-
---// EQUIPAR TOOL AUTOMÁTICAMENTE
-local function gettool()
-    local player = game.Players.LocalPlayer
-    local char = player.Character
-    if not char then return end
-
-    for _,tool in pairs(player.Backpack:GetChildren()) do
-        if tool:IsA("Tool") then
-            tool.Parent = char
+            statLabels[info.name].Text = displayText
         end
+        task.wait(0.1)
     end
-end
+end)
 
 task.spawn(function()
     while true do
@@ -2103,6 +2101,27 @@ task.spawn(function()
         task.wait(0.1)
     end
 end)
+
+--// FARMING TAB
+local folder = FarmingTab
+local selectrock = nil
+
+--// VARIABLES
+getgenv().autoPunch = false
+getgenv().autoFarm = false
+
+--// EQUIPAR TOOL AUTOMÁTICAMENTE
+local function gettool()
+    local player = game.Players.LocalPlayer
+    local char = player.Character
+    if not char then return end
+
+    for _,tool in pairs(player.Backpack:GetChildren()) do
+        if tool:IsA("Tool") then
+            tool.Parent = char
+        end
+    end
+end
 
 --// AUTO PUNCH RÁPIDO
 folder:AddSwitch("Auto Punch Fast", function(bool)
