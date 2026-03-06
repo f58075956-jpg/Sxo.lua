@@ -2078,3 +2078,110 @@ while true do
     end
     wait(0.1)
 end
+
+--// FARMING TAB
+local folder = FarmingTab
+local selectrock = nil
+
+--// VARIABLES
+getgenv().autoPunch = false
+getgenv().autoFarm = false
+
+--// EQUIPAR TOOL AUTOMÁTICAMENTE
+local function gettool()
+    local player = game.Players.LocalPlayer
+    local char = player.Character
+    if not char then return end
+
+    for _,tool in pairs(player.Backpack:GetChildren()) do
+        if tool:IsA("Tool") then
+            tool.Parent = char
+        end
+    end
+end
+
+--// AUTO PUNCH RÁPIDO
+folder:AddSwitch("Auto Punch Fast", function(bool)
+
+    getgenv().autoPunch = bool
+
+    if bool then
+        task.spawn(function()
+
+            while getgenv().autoPunch do
+                task.wait(0.01)
+
+                local player = game.Players.LocalPlayer
+                local char = player.Character
+
+                if char then
+
+                    gettool()
+
+                    local tool = char:FindFirstChildOfClass("Tool")
+
+                    if tool then
+                        tool:Activate()
+                    end
+                end
+            end
+
+        end)
+    end
+end)
+
+--// FUNCIÓN PARA CREAR FARMS DE ROCAS
+local function createRockSwitch(name, durability)
+
+    folder:AddSwitch("Farm "..name, function(bool)
+
+        selectrock = name
+        getgenv().autoFarm = bool
+
+        if bool then
+            task.spawn(function()
+
+                while getgenv().autoFarm do
+                    task.wait(0.001)
+
+                    local player = game.Players.LocalPlayer
+
+                    if player and player:FindFirstChild("Durability") and player.Durability.Value >= durability then
+
+                        for _,v in pairs(workspace.machinesFolder:GetDescendants()) do
+
+                            if v.Name == "neededDurability" and v.Value == durability then
+
+                                local char = player.Character
+
+                                if char and char:FindFirstChild("LeftHand") and char:FindFirstChild("RightHand") then
+
+                                    firetouchinterest(v.Parent.Rock, char.RightHand, 0)
+                                    firetouchinterest(v.Parent.Rock, char.RightHand, 1)
+
+                                    firetouchinterest(v.Parent.Rock, char.LeftHand, 0)
+                                    firetouchinterest(v.Parent.Rock, char.LeftHand, 1)
+
+                                    gettool()
+
+                                end
+                            end
+                        end
+                    end
+                end
+
+            end)
+        end
+    end)
+end
+
+--// LISTA DE ROCAS
+createRockSwitch("Tiny Island Rock", 0)
+createRockSwitch("Starter Island Rock", 100)
+createRockSwitch("Legend Beach Rock", 5000)
+createRockSwitch("Frost Gym Rock", 150000)
+createRockSwitch("Mythical Gym Rock", 400000)
+createRockSwitch("Eternal Gym Rock", 750000)
+createRockSwitch("Legend Gym Rock", 1000000)
+createRockSwitch("Muscle King Gym Rock", 5000000)
+createRockSwitch("Ancient Jungle Rock", 10000000)
