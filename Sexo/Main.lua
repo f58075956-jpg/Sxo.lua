@@ -2060,24 +2060,7 @@ for _, info in ipairs(stats) do
     statLabels[info.name].TextSize = 20
 end
 
-while true do
-    for _, info in ipairs(stats) do
-        local currentValue = info.stat.Value
-        local gained = currentValue - initialValues[info.name]
-        
-        local displayText = string.format(
-            "%s: %s (%s) | Gained: %s (%s)",
-            info.name,
-            formatNumber(currentValue),
-            formatWithCommas(currentValue),
-            formatNumber(gained),
-            formatWithCommas(gained)
-        )
-        
-        statLabels[info.name].Text = displayText
-    end
-    wait(0.1)
-end
+
 
 --// FARMING TAB
 local folder = FarmingTab
@@ -2099,6 +2082,27 @@ local function gettool()
         end
     end
 end
+
+task.spawn(function()
+    while true do
+        for _, info in ipairs(stats) do
+            local currentValue = info.stat.Value
+            local gained = currentValue - initialValues[info.name]
+
+            local displayText = string.format(
+                "%s: %s (%s) | Gained: %s (%s)",
+                info.name,
+                formatNumber(currentValue),
+                formatWithCommas(currentValue),
+                formatNumber(gained),
+                formatWithCommas(gained)
+            )
+
+            statLabels[info.name].Text = displayText
+        end
+        task.wait(0.1)
+    end
+end)
 
 --// AUTO PUNCH RÁPIDO
 folder:AddSwitch("Auto Punch Fast", function(bool)
