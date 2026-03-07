@@ -608,7 +608,7 @@ local function fastRepLoop()
             task.wait(0.02)
         end
         while runFastRep and getPing() >= 350 do
-            task.wait(1)
+            task.wait(0.01)
         end
     end
 end
