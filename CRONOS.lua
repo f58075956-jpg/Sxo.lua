@@ -832,3 +832,13 @@ infoTab:AddLabel("")
 local wLabel = infoTab:AddLabel("VERSION//2.0.0")
 wLabel.TextSize = 40
 wLabel.Font = Enum.Font.Arcade
+
+local MainTab = window:AddTab("Main")
+local KillingTab = window:AddTab("Killing")
+local SpecsTab = window:AddTab("Specs")
+local FarmingTab = window:AddTab("Farming")
+local InventoryTab = window:AddTab("Inventory")
+local PetsTab = window:AddTab("Pet Shop")
+local TeleportTab = window:AddTab("Teleports")
+local StatsTab = window:AddTab("Stats")
+local rebTab = window:AddTab(" Rebirth")
